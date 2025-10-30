@@ -114,11 +114,8 @@ Menunjukkan topik populer tiap kuartal (2023–2025):
 - POS paling sering: NOUN (28.475) → fokus pada entitas nyata seperti tarif, mitra, driver.
 - NER dominan: ORG (Gojek, GoTo, Pemerintah) & GPE (Jakarta, Indonesia).
 
-![Contoh Highlight Named Entity (NER)](image/bowikn.png)
+![Distribusi POS](Code/images/PosKeseluruhan.png)
 
-- Distribusi label entitas berdasarkan frekuensi kemunculan:
-
-![Distribusi Label Entitas NER](image/nerikn.png)
 
 #### 8.4 Perbandingan Model Sentimen
 
