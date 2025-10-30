@@ -18,7 +18,8 @@ Departemen Sistem Informasi, Fakultas Teknologi Elektro dan Informatika Cerdas (
 
 ## ✨ Abstrak
 
-Penelitian ini mengevaluasi sentimen publik terhadap Gojek sebagai layanan on-demand di Indonesia melalui web scraping dan NLP. Model IndoBERT yang telah di-fine-tune digunakan sebagai model utama dan dibandingkan dengan pendekatan tradisional TF-IDF + SVM dan Logistic Regression. Hasil menunjukkan bahwa IndoBERT memberikan performa klasifikasi sentimen tertinggi, terutama dalam menangkap konteks positif dan negatif.
+Analisis sentimen otomatis terhadap berita daring yang membahas layanan Gojek, menggunakan pendekatan Natural Language Processing (NLP) dan model Logistic Regression + TF-IDF.
+Proyek ini dikembangkan sebagai bagian dari mata kuliah Pengolahan Bahasa Alami (PBA) — Departemen Sistem Informasi, Fakultas Teknologi Elektro dan Informatika Cerdas, Institut Teknologi Sepuluh Nopember (ITS), Semester Gasal 2025.
 
 ---
 
@@ -26,9 +27,15 @@ Penelitian ini mengevaluasi sentimen publik terhadap Gojek sebagai layanan on-de
 
 ### 1. Pendahuluan
 
-- Menjelaskan konteks digitalisasi opini publik.
-- Menyoroti pentingnya analisis media dalam isu strategis seperti layanan on-demand Gojek.
-- Menetapkan tujuan: memahami persepsi publik terhadap Gojek melalui sentimen dalam berita daring.
+Seiring meningkatnya penggunaan layanan Gojek di Indonesia, persepsi publik melalui media menjadi penting untuk dianalisis.
+Penelitian ini bertujuan untuk:
+
+  1. Mengumpulkan berita daring terkait Gojek.
+  2. Melakukan pra-pemrosesan teks (cleaning, tokenizing, stopword removal, stemming).
+  3. Membangun model klasifikasi sentimen menggunakan TF-IDF dan Logistic Regression.
+  4. Mengevaluasi performa model dan memetakan tren pemberitaan terhadap Gojek.
+
+Hasilnya diharapkan membantu memahami citra publik dan persepsi media terhadap Gojek secara kuantitatif dan visual.
 
 ### 2. Tinjauan Pustaka
 
@@ -41,52 +48,71 @@ Penelitian ini mengevaluasi sentimen publik terhadap Gojek sebagai layanan on-de
 
 ### 3. Akuisisi Data
 
-- Teknik Google Dorking untuk pencarian artikel terkait Gojek.
-- Scraping menggunakan BeautifulSoup.
-- Labeling manual untuk sentimen (positif, netral, negatif).
+- Pengumpulan 177 artikel berita tentang Gojek dari berbagai portal (Tempo, CNN Indonesia, Kompas, Liputan6, dll).
+- Proses dilakukan secara manual crawling dan scraping konten menggunakan library newspaper3k.
 
 ### 4. Data Preprocessing
 
-- Cleaning konten artikel (emoji, tanda baca, dll).
-- Tokenisasi dan penghapusan stopwords.
-- Stemming & Lemmatization.
-- Filtering kata umum dan langka.
-- Augmentasi data (synonym replacement, back translation, dll) untuk penyeimbangan kelas.
+- Case folding → ubah ke huruf kecil.
+- Punctuation removal → hapus tanda baca & karakter khusus.
+- Tokenizing → pecah teks jadi token kata.
+- Stopword removal → hapus kata tidak bermakna (“yang”, “di”, “dan”).
+- Stemming → gunakan library Sastrawi untuk mengembalikan kata ke bentuk dasar.
 
-### 5. Definisi Dataset
+### 5. Ekstraksi Fitur
 
-- Dataset terdiri dari: judul, penerbit, tanggal, konten, label sentimen.
-- Versi setelah preprocessing disertai fitur: cleaned_content, content_without_stopwords, stemming, lemmatized, wordcount, dll.
+Gunakan TF-IDF (Term Frequency – Inverse Document Frequency) untuk mengubah teks menjadi vektor numerik yang mewakili bobot penting setiap kata.
 
-### 6. Analisis Data
+### 6. Pemodelan
 
-#### 6.1 Analisis Sentimen
+Model klasifikasi menggunakan:
 
-- Mayoritas artikel bersifat netral.
-- WordCloud dan distribusi kata pada artikel positif dan negatif memberikan insight naratif yang berbeda.
+Algoritma: Logistic Regression
 
-![WordCloud Sentimen Positif vs Negatif](image/worcloudposnegikn.png)
+Feature Extraction: TF-IDF
+
+Train-Test Split: 80:20
+
+### 7. Definisi Dataset
+
+- Dataset terdiri dari: No, Title, Source, URL, article_text, tanggal, cleaned_text, tokens, stemmed_tokens, stemmed_text, polarity, sentiment, dan tag.
+- Versi setelah preprocessing mencakup fitur hasil pembersihan teks seperti cleaned_text, tokenisasi (tokens), stemming (stemmed_text / stemmed_tokens), serta skor dan label sentimen (polarity, sentiment).
+
+
+## 📈 Evaluasi Akhir Model
+
+| Kelas   | Precision | Recall | F1-Score |
+| ------- | --------- | ------ | -------- |
+| Negatif | 0.94      | 0.80   | 0.86     |
+| Netral  | 1.00      | 0.95   | 0.97     |
+| Positif | 0.79      | 0.95   | 0.86     |
+
+### 8. Analisis Data
+
+#### 8.1 Analisis Sentimen
+
+Menampilkan kata yang paling sering muncul berdasarkan sentimen positif dan negatif.
+  - Kata dominan positif: layanan, guna, driver, fitur.
+  - Kata dominan negatif: tarif, akun, kendala, kemenhub.
+
+![WordCloud Sentimen Positif vs Negatif](code/images/PosNeg.png)
 
 - Tren pemberitaan meningkat pada periode tertentu, bergantung pada peristiwa dan kampanye terkait Gojek.
 
-#### 6.2 Analisis TF-IDF
+#### 8.2 Analisis TF-IDF
 
-- Mengidentifikasi kata-kata penting per dokumen.
-- TF-IDF dominan: "gojek", "driver", "ojol", "aplikasi", dst.
-- TF-IDF per sentimen:
+Menunjukkan topik populer tiap kuartal (2023–2025):
 
-  - Positif: promo, layanan, fitur.
-  - Negatif: tarif, order, batal.
+  - 2023: fokus pada tarif & fitur.
+  - 2024: isu hukum & keluhan layanan.
+  - 2025: relasi mitra dan kampanye perusahaan.
 
-- Wordcloud keseluruhan konten terfilter dan 100 kata dengan frekuensi tertinggi divisualisasikan sebagai berikut:
+![Plot TF-IDF](Code/images/TopikPerTahun.png)
 
-![WordCloud + Histogram TF-IDF](image/wordcloudikntopfrequent.png)
+#### 8.3 Analisis POS dan NER
 
-#### 6.3 Analisis POS dan NER
-
-- POS menunjukkan dominasi NOUN dan VERB.
-- NER mengenali entitas penting: PER (orang), ORG (organisasi), GPE (lokasi), DAT (tanggal), LAW (undang-undang).
-- Visualisasi entitas hasil Named Entity Recognition:
+- POS paling sering: NOUN (28.475) → fokus pada entitas nyata seperti tarif, mitra, driver.
+- NER dominan: ORG (Gojek, GoTo, Pemerintah) & GPE (Jakarta, Indonesia).
 
 ![Contoh Highlight Named Entity (NER)](image/bowikn.png)
 
@@ -94,7 +120,7 @@ Penelitian ini mengevaluasi sentimen publik terhadap Gojek sebagai layanan on-de
 
 ![Distribusi Label Entitas NER](image/nerikn.png)
 
-#### 6.4 Perbandingan Model Sentimen
+#### 8.4 Perbandingan Model Sentimen
 
 - IndoBERT outperform TF-IDF+SVM dan Logistic Regression.
 
@@ -126,13 +152,6 @@ Penelitian ini mengevaluasi sentimen publik terhadap Gojek sebagai layanan on-de
 
 ---
 
-## 📈 Evaluasi Akhir Model
-
-| Model           | Accuracy | F1 (Positif) | F1 (Negatif) | F1 (Netral) |
-| --------------- | -------- | ------------ | ------------ | ----------- |
-| **IndoBERT**    | 82%      | 0.87         | 0.83         | 0.75        |
-| TF-IDF + SVM    | 78%      | 0.88         | 0.79         | 0.67        |
-| TF-IDF + LogReg | 76%      | 0.74         | 0.78         | 0.69        |
 
 ---
 
