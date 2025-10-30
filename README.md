@@ -7,7 +7,7 @@
 ## 👥 Anggota Kelompok
 
 - Malvin Reynara Jawakory (5026221188)
-- Muhammad Irfan Almizan ()
+- Muhammad Irfan Almizan (5026221065)
 - Luthfi Rihadatul Fajri (5026221077)
 
 ## 🏢 Institusi
