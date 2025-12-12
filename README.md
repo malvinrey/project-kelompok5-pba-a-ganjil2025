@@ -30,10 +30,10 @@ Proyek ini dikembangkan sebagai bagian dari mata kuliah Pengolahan Bahasa Alami 
 Seiring meningkatnya penggunaan layanan Gojek di Indonesia, persepsi publik melalui media menjadi penting untuk dianalisis.
 Penelitian ini bertujuan untuk:
 
-  1. Mengumpulkan berita daring terkait Gojek.
-  2. Melakukan pra-pemrosesan teks (cleaning, tokenizing, stopword removal, stemming).
-  3. Membangun model klasifikasi sentimen menggunakan TF-IDF dan Logistic Regression.
-  4. Mengevaluasi performa model dan memetakan tren pemberitaan terhadap Gojek.
+1. Mengumpulkan berita daring terkait Gojek.
+2. Melakukan pra-pemrosesan teks (cleaning, tokenizing, stopword removal, stemming).
+3. Membangun model klasifikasi sentimen menggunakan TF-IDF dan Logistic Regression.
+4. Mengevaluasi performa model dan memetakan tren pemberitaan terhadap Gojek.
 
 Hasilnya diharapkan membantu memahami citra publik dan persepsi media terhadap Gojek secara kuantitatif dan visual.
 
@@ -78,7 +78,6 @@ Train-Test Split: 80:20
 - Dataset terdiri dari: No, Title, Source, URL, article_text, tanggal, cleaned_text, tokens, stemmed_tokens, stemmed_text, polarity, sentiment, dan tag.
 - Versi setelah preprocessing mencakup fitur hasil pembersihan teks seperti cleaned_text, tokenisasi (tokens), stemming (stemmed_text / stemmed_tokens), serta skor dan label sentimen (polarity, sentiment).
 
-
 ## 📈 Evaluasi Akhir Model
 
 | Kelas   | Precision | Recall | F1-Score |
@@ -92,10 +91,11 @@ Train-Test Split: 80:20
 #### 8.1 Analisis Sentimen
 
 Menampilkan kata yang paling sering muncul berdasarkan sentimen positif dan negatif.
-  - Kata dominan positif: layanan, guna, driver, fitur.
-  - Kata dominan negatif: tarif, akun, kendala, kemenhub.
 
-![WordCloud Sentimen Positif vs Negatif](code/images/PosNeg.png)
+- Kata dominan positif: layanan, guna, driver, fitur.
+- Kata dominan negatif: tarif, akun, kendala, kemenhub.
+
+![WordCloud Sentimen Positif vs Negatif](Code/images/PosNeg.png)
 
 - Tren pemberitaan meningkat pada periode tertentu, bergantung pada peristiwa dan kampanye terkait Gojek.
 
@@ -103,9 +103,9 @@ Menampilkan kata yang paling sering muncul berdasarkan sentimen positif dan nega
 
 Menunjukkan topik populer tiap kuartal (2023–2025):
 
-  - 2023: fokus pada tarif & fitur.
-  - 2024: isu hukum & keluhan layanan.
-  - 2025: relasi mitra dan kampanye perusahaan.
+- 2023: fokus pada tarif & fitur.
+- 2024: isu hukum & keluhan layanan.
+- 2025: relasi mitra dan kampanye perusahaan.
 
 ![Plot TF-IDF](Code/images/TopikPerTahun.png)
 
@@ -116,9 +116,7 @@ Menunjukkan topik populer tiap kuartal (2023–2025):
 
 ![Distribusi POS](Code/images/PosKeseluruhan.png)
 
-
 #### 8.4 Perbandingan Model Sentimen
-
 
 - F1-Score Positif: 0.87, Negatif: 0.83, Netral: 0.75
 
@@ -144,7 +142,6 @@ Menunjukkan topik populer tiap kuartal (2023–2025):
 - Model: IndoBERT-base-p1, Logistic Regression, SVM
 
 ---
-
 
 ---
 
