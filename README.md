@@ -119,9 +119,6 @@ Menunjukkan topik populer tiap kuartal (2023–2025):
 
 #### 8.4 Perbandingan Model Sentimen
 
-- IndoBERT outperform TF-IDF+SVM dan Logistic Regression.
-
-- Accuracy IndoBERT: \~82–83%
 
 - F1-Score Positif: 0.87, Negatif: 0.83, Netral: 0.75
 
@@ -135,7 +132,6 @@ Menunjukkan topik populer tiap kuartal (2023–2025):
 
 ### 7. Kesimpulan
 
-- IndoBERT mampu menangkap konteks sentimen lebih baik.
 - Sentimen publik terhadap Gojek cenderung netral secara umum, dengan polaritas muncul pada isu-isu layanan, tarif, dan dampak sosial ekonomi.
 - Insight ini dapat dimanfaatkan oleh perusahaan dan media untuk mengelola komunikasi publik secara lebih responsif.
 
